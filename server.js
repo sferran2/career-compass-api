@@ -1,3 +1,9 @@
+// DNS override only in development
+if (process.env.NODE_ENV !== 'production') {
+  const dns = require('node:dns/promises');
+  dns.setServers(['1.1.1.1', '8.8.8.8']);
+}
+
 require("dotenv").config();
 
 const express = require("express");
