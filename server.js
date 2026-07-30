@@ -2,6 +2,8 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 
 const database = require("./db/connect");
 
@@ -13,12 +15,27 @@ const port = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(express.json());
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.get("/", (req, res) => {
-  res.status(200).json({
-    message: "Welcome to the Career Compass API"
-  });
-});
+app.get(
+  "/",
+  /*
+    #swagger.start
+    #swagger.tags = ['Home']
+    #swagger.summary = 'API Home'
+    #swagger.description = 'Returns a welcome message from the Career Compass API.'
+
+    #swagger.responses[200] = {
+      description: 'API is running successfully.'
+    }
+    #swagger.end
+  */
+  (req, res) => {
+    res.status(200).json({
+      message: "Welcome to the Career Compass API"
+    });
+  }
+);
 
 app.use("/applications", applicationsRoutes);
 app.use("/companies", companiesRoutes);

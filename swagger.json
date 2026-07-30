@@ -1,0 +1,893 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Career Compass API",
+    "description": "REST API for the Career Compass team project.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "summary": "API Home",
+        "description": "Returns a welcome message from the Career Compass API.",
+        "responses": {
+          "200": {
+            "description": "API is running successfully."
+          }
+        }
+      }
+    },
+    "/applications/": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Get all applications",
+        "description": "Retrieves all job applications from the database.",
+        "responses": {
+          "200": {
+            "description": "Applications retrieved successfully."
+          },
+          "500": {
+            "description": "An unexpected server error occurred."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Create a new application",
+        "description": "Creates a new job application in the database.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Application information",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "required": {
+                  "type": "array",
+                  "example": [
+                    "jobTitle",
+                    "companyId",
+                    "status",
+                    "dateApplied",
+                    "location"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "jobTitle": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Software Developer"
+                        }
+                      }
+                    },
+                    "companyId": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "6890b3d4f8d8c123456789ab"
+                        }
+                      }
+                    },
+                    "status": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "enum": {
+                          "type": "array",
+                          "example": [
+                            "Interested",
+                            "Applied",
+                            "Interviewing",
+                            "Offer",
+                            "Rejected",
+                            "Withdrawn"
+                          ],
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Applied"
+                        }
+                      }
+                    },
+                    "dateApplied": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "format": {
+                          "type": "string",
+                          "example": "date"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "2026-07-28"
+                        }
+                      }
+                    },
+                    "jobUrl": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "https://company.com/jobs/123"
+                        }
+                      }
+                    },
+                    "location": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Orlando, FL"
+                        }
+                      }
+                    },
+                    "salary": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "number"
+                        },
+                        "example": {
+                          "type": "number",
+                          "example": 85000
+                        }
+                      }
+                    },
+                    "contactName": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Jane Smith"
+                        }
+                      }
+                    },
+                    "notes": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "First interview scheduled."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Application created successfully."
+          },
+          "400": {
+            "description": "Application validation failed."
+          },
+          "500": {
+            "description": "An unexpected server error occurred."
+          }
+        }
+      }
+    },
+    "/applications/{id}": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Get a single application",
+        "description": "Retrieves a specific job application by its MongoDB ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "MongoDB ID of the application"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Application retrieved successfully."
+          },
+          "400": {
+            "description": "Invalid MongoDB ID format."
+          },
+          "404": {
+            "description": "Application not found."
+          },
+          "500": {
+            "description": "An unexpected server error occurred."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Update an application",
+        "description": "Updates an existing job application by its MongoDB ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "MongoDB ID of the application"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updated application information",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "required": {
+                  "type": "array",
+                  "example": [
+                    "jobTitle",
+                    "companyId",
+                    "status",
+                    "dateApplied",
+                    "location"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "jobTitle": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Software Developer"
+                        }
+                      }
+                    },
+                    "companyId": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "6890b3d4f8d8c123456789ab"
+                        }
+                      }
+                    },
+                    "status": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "enum": {
+                          "type": "array",
+                          "example": [
+                            "Interested",
+                            "Applied",
+                            "Interviewing",
+                            "Offer",
+                            "Rejected",
+                            "Withdrawn"
+                          ],
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Interviewing"
+                        }
+                      }
+                    },
+                    "dateApplied": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "format": {
+                          "type": "string",
+                          "example": "date"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "2026-07-28"
+                        }
+                      }
+                    },
+                    "jobUrl": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "https://company.com/jobs/123"
+                        }
+                      }
+                    },
+                    "location": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Orlando, FL"
+                        }
+                      }
+                    },
+                    "salary": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "number"
+                        },
+                        "example": {
+                          "type": "number",
+                          "example": 90000
+                        }
+                      }
+                    },
+                    "contactName": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Jane Smith"
+                        }
+                      }
+                    },
+                    "notes": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Second interview scheduled."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Application updated successfully."
+          },
+          "400": {
+            "description": "Application validation failed or invalid MongoDB ID."
+          },
+          "404": {
+            "description": "Application not found."
+          },
+          "500": {
+            "description": "An unexpected server error occurred."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Delete an application",
+        "description": "Deletes an existing job application by its MongoDB ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "MongoDB ID of the application"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Application deleted successfully."
+          },
+          "400": {
+            "description": "Invalid MongoDB ID format."
+          },
+          "404": {
+            "description": "Application not found."
+          },
+          "500": {
+            "description": "An unexpected server error occurred."
+          }
+        }
+      }
+    },
+    "/companies/": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Get all companies",
+        "description": "Retrieves all companies from the database.",
+        "responses": {
+          "200": {
+            "description": "Companies retrieved successfully."
+          },
+          "500": {
+            "description": "An unexpected server error occurred."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Create a new company",
+        "description": "Creates a new company in the database.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Company information",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "required": {
+                  "type": "array",
+                  "example": [
+                    "name",
+                    "industry",
+                    "location"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Tech Solutions Inc."
+                        }
+                      }
+                    },
+                    "industry": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Software Development"
+                        }
+                      }
+                    },
+                    "location": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Orlando, FL"
+                        }
+                      }
+                    },
+                    "website": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "https://www.techsolutions.com"
+                        }
+                      }
+                    },
+                    "contactName": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "John Smith"
+                        }
+                      }
+                    },
+                    "contactEmail": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "john.smith@techsolutions.com"
+                        }
+                      }
+                    },
+                    "contactPhone": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "407-555-1234"
+                        }
+                      }
+                    },
+                    "notes": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "The company offers remote work opportunities."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Company created successfully."
+          },
+          "400": {
+            "description": "Company validation failed."
+          },
+          "500": {
+            "description": "An unexpected server error occurred."
+          }
+        }
+      }
+    },
+    "/companies/{id}": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Get a single company",
+        "description": "Retrieves a specific company by its MongoDB ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "MongoDB ID of the company"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Company retrieved successfully."
+          },
+          "400": {
+            "description": "Invalid MongoDB ID format."
+          },
+          "404": {
+            "description": "Company not found."
+          },
+          "500": {
+            "description": "An unexpected server error occurred."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Update a company",
+        "description": "Updates an existing company by its MongoDB ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "MongoDB ID of the company"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updated company information",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "required": {
+                  "type": "array",
+                  "example": [
+                    "name",
+                    "industry",
+                    "location"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Tech Solutions Inc."
+                        }
+                      }
+                    },
+                    "industry": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Software Development"
+                        }
+                      }
+                    },
+                    "location": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Orlando, FL"
+                        }
+                      }
+                    },
+                    "website": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "https://www.techsolutions.com"
+                        }
+                      }
+                    },
+                    "contactName": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Jane Smith"
+                        }
+                      }
+                    },
+                    "contactEmail": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "jane.smith@techsolutions.com"
+                        }
+                      }
+                    },
+                    "contactPhone": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "407-555-5678"
+                        }
+                      }
+                    },
+                    "notes": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        },
+                        "example": {
+                          "type": "string",
+                          "example": "Follow up regarding future job openings."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Company updated successfully."
+          },
+          "400": {
+            "description": "Company validation failed or invalid MongoDB ID."
+          },
+          "404": {
+            "description": "Company not found."
+          },
+          "500": {
+            "description": "An unexpected server error occurred."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Delete a company",
+        "description": "Deletes an existing company by its MongoDB ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "MongoDB ID of the company"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Company deleted successfully."
+          },
+          "400": {
+            "description": "Invalid MongoDB ID format."
+          },
+          "404": {
+            "description": "Company not found."
+          },
+          "500": {
+            "description": "An unexpected server error occurred."
+          }
+        }
+      }
+    }
+  }
+}
