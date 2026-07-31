@@ -81,61 +81,15 @@ router.post(
       description: 'Application information',
       required: true,
       schema: {
-        type: 'object',
-        required: [
-          'jobTitle',
-          'companyId',
-          'status',
-          'dateApplied',
-          'location'
-        ],
-        properties: {
-          jobTitle: {
-            type: 'string',
-            example: 'Software Developer'
-          },
-          companyId: {
-            type: 'string',
-            example: '6890b3d4f8d8c123456789ab'
-          },
-          status: {
-            type: 'string',
-            enum: [
-              'Interested',
-              'Applied',
-              'Interviewing',
-              'Offer',
-              'Rejected',
-              'Withdrawn'
-            ],
-            example: 'Applied'
-          },
-          dateApplied: {
-            type: 'string',
-            format: 'date',
-            example: '2026-07-28'
-          },
-          jobUrl: {
-            type: 'string',
-            example: 'https://company.com/jobs/123'
-          },
-          location: {
-            type: 'string',
-            example: 'Orlando, FL'
-          },
-          salary: {
-            type: 'number',
-            example: 85000
-          },
-          contactName: {
-            type: 'string',
-            example: 'Jane Smith'
-          },
-          notes: {
-            type: 'string',
-            example: 'First interview scheduled.'
-          }
-        }
+        $jobTitle: 'Software Developer',
+        $companyId: '6890b3d4f8d8c123456789ab',
+        $status: 'Applied',
+        $dateApplied: '2026-07-28',
+        jobUrl: 'https://company.com/jobs/123',
+        $location: 'Orlando, FL',
+        salary: 85000,
+        contactName: 'Jane Smith',
+        notes: 'First interview scheduled.'
       }
     }
 
@@ -178,61 +132,15 @@ router.put(
       description: 'Updated application information',
       required: true,
       schema: {
-        type: 'object',
-        required: [
-          'jobTitle',
-          'companyId',
-          'status',
-          'dateApplied',
-          'location'
-        ],
-        properties: {
-          jobTitle: {
-            type: 'string',
-            example: 'Software Developer'
-          },
-          companyId: {
-            type: 'string',
-            example: '6890b3d4f8d8c123456789ab'
-          },
-          status: {
-            type: 'string',
-            enum: [
-              'Interested',
-              'Applied',
-              'Interviewing',
-              'Offer',
-              'Rejected',
-              'Withdrawn'
-            ],
-            example: 'Interviewing'
-          },
-          dateApplied: {
-            type: 'string',
-            format: 'date',
-            example: '2026-07-28'
-          },
-          jobUrl: {
-            type: 'string',
-            example: 'https://company.com/jobs/123'
-          },
-          location: {
-            type: 'string',
-            example: 'Orlando, FL'
-          },
-          salary: {
-            type: 'number',
-            example: 90000
-          },
-          contactName: {
-            type: 'string',
-            example: 'Jane Smith'
-          },
-          notes: {
-            type: 'string',
-            example: 'Second interview scheduled.'
-          }
-        }
+        $jobTitle: 'Software Developer',
+        $companyId: '6890b3d4f8d8c123456789ab',
+        $status: 'Interviewing',
+        $dateApplied: '2026-07-28',
+        jobUrl: 'https://company.com/jobs/123',
+        $location: 'Orlando, FL',
+        salary: 90000,
+        contactName: 'Jane Smith',
+        notes: 'Second interview scheduled.'
       }
     }
 

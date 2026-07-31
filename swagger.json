@@ -5,10 +5,10 @@
     "description": "REST API for the Career Compass team project.",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "career-compass-api-id3k.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/": {
@@ -56,164 +56,50 @@
             "schema": {
               "type": "object",
               "properties": {
-                "type": {
+                "jobTitle": {
                   "type": "string",
-                  "example": "object"
+                  "example": "Software Developer"
                 },
-                "required": {
-                  "type": "array",
-                  "example": [
-                    "jobTitle",
-                    "companyId",
-                    "status",
-                    "dateApplied",
-                    "location"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
+                "companyId": {
+                  "type": "string",
+                  "example": "6890b3d4f8d8c123456789ab"
                 },
-                "properties": {
-                  "type": "object",
-                  "properties": {
-                    "jobTitle": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Software Developer"
-                        }
-                      }
-                    },
-                    "companyId": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "6890b3d4f8d8c123456789ab"
-                        }
-                      }
-                    },
-                    "status": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "enum": {
-                          "type": "array",
-                          "example": [
-                            "Interested",
-                            "Applied",
-                            "Interviewing",
-                            "Offer",
-                            "Rejected",
-                            "Withdrawn"
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Applied"
-                        }
-                      }
-                    },
-                    "dateApplied": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "format": {
-                          "type": "string",
-                          "example": "date"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "2026-07-28"
-                        }
-                      }
-                    },
-                    "jobUrl": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "https://company.com/jobs/123"
-                        }
-                      }
-                    },
-                    "location": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Orlando, FL"
-                        }
-                      }
-                    },
-                    "salary": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "number"
-                        },
-                        "example": {
-                          "type": "number",
-                          "example": 85000
-                        }
-                      }
-                    },
-                    "contactName": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Jane Smith"
-                        }
-                      }
-                    },
-                    "notes": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "First interview scheduled."
-                        }
-                      }
-                    }
-                  }
+                "status": {
+                  "type": "string",
+                  "example": "Applied"
+                },
+                "dateApplied": {
+                  "type": "string",
+                  "example": "2026-07-28"
+                },
+                "jobUrl": {
+                  "type": "string",
+                  "example": "https://company.com/jobs/123"
+                },
+                "location": {
+                  "type": "string",
+                  "example": "Orlando, FL"
+                },
+                "salary": {
+                  "type": "number",
+                  "example": 85000
+                },
+                "contactName": {
+                  "type": "string",
+                  "example": "Jane Smith"
+                },
+                "notes": {
+                  "type": "string",
+                  "example": "First interview scheduled."
                 }
-              }
+              },
+              "required": [
+                "jobTitle",
+                "companyId",
+                "status",
+                "dateApplied",
+                "location"
+              ]
             }
           }
         ],
@@ -283,164 +169,50 @@
             "schema": {
               "type": "object",
               "properties": {
-                "type": {
+                "jobTitle": {
                   "type": "string",
-                  "example": "object"
+                  "example": "Software Developer"
                 },
-                "required": {
-                  "type": "array",
-                  "example": [
-                    "jobTitle",
-                    "companyId",
-                    "status",
-                    "dateApplied",
-                    "location"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
+                "companyId": {
+                  "type": "string",
+                  "example": "6890b3d4f8d8c123456789ab"
                 },
-                "properties": {
-                  "type": "object",
-                  "properties": {
-                    "jobTitle": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Software Developer"
-                        }
-                      }
-                    },
-                    "companyId": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "6890b3d4f8d8c123456789ab"
-                        }
-                      }
-                    },
-                    "status": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "enum": {
-                          "type": "array",
-                          "example": [
-                            "Interested",
-                            "Applied",
-                            "Interviewing",
-                            "Offer",
-                            "Rejected",
-                            "Withdrawn"
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Interviewing"
-                        }
-                      }
-                    },
-                    "dateApplied": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "format": {
-                          "type": "string",
-                          "example": "date"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "2026-07-28"
-                        }
-                      }
-                    },
-                    "jobUrl": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "https://company.com/jobs/123"
-                        }
-                      }
-                    },
-                    "location": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Orlando, FL"
-                        }
-                      }
-                    },
-                    "salary": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "number"
-                        },
-                        "example": {
-                          "type": "number",
-                          "example": 90000
-                        }
-                      }
-                    },
-                    "contactName": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Jane Smith"
-                        }
-                      }
-                    },
-                    "notes": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Second interview scheduled."
-                        }
-                      }
-                    }
-                  }
+                "status": {
+                  "type": "string",
+                  "example": "Interviewing"
+                },
+                "dateApplied": {
+                  "type": "string",
+                  "example": "2026-07-28"
+                },
+                "jobUrl": {
+                  "type": "string",
+                  "example": "https://company.com/jobs/123"
+                },
+                "location": {
+                  "type": "string",
+                  "example": "Orlando, FL"
+                },
+                "salary": {
+                  "type": "number",
+                  "example": 90000
+                },
+                "contactName": {
+                  "type": "string",
+                  "example": "Jane Smith"
+                },
+                "notes": {
+                  "type": "string",
+                  "example": "Second interview scheduled."
                 }
-              }
+              },
+              "required": [
+                "jobTitle",
+                "companyId",
+                "status",
+                "dateApplied",
+                "location"
+              ]
             }
           }
         ],
@@ -521,131 +293,44 @@
             "schema": {
               "type": "object",
               "properties": {
-                "type": {
+                "name": {
                   "type": "string",
-                  "example": "object"
+                  "example": "Tech Solutions Inc."
                 },
-                "required": {
-                  "type": "array",
-                  "example": [
-                    "name",
-                    "industry",
-                    "location"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
+                "industry": {
+                  "type": "string",
+                  "example": "Software Development"
                 },
-                "properties": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Tech Solutions Inc."
-                        }
-                      }
-                    },
-                    "industry": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Software Development"
-                        }
-                      }
-                    },
-                    "location": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Orlando, FL"
-                        }
-                      }
-                    },
-                    "website": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "https://www.techsolutions.com"
-                        }
-                      }
-                    },
-                    "contactName": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "John Smith"
-                        }
-                      }
-                    },
-                    "contactEmail": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "john.smith@techsolutions.com"
-                        }
-                      }
-                    },
-                    "contactPhone": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "407-555-1234"
-                        }
-                      }
-                    },
-                    "notes": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "The company offers remote work opportunities."
-                        }
-                      }
-                    }
-                  }
+                "location": {
+                  "type": "string",
+                  "example": "Orlando, FL"
+                },
+                "website": {
+                  "type": "string",
+                  "example": "https://www.techsolutions.com"
+                },
+                "contactName": {
+                  "type": "string",
+                  "example": "John Smith"
+                },
+                "contactEmail": {
+                  "type": "string",
+                  "example": "john.smith@techsolutions.com"
+                },
+                "contactPhone": {
+                  "type": "string",
+                  "example": "407-555-1234"
+                },
+                "notes": {
+                  "type": "string",
+                  "example": "The company offers remote work opportunities."
                 }
-              }
+              },
+              "required": [
+                "name",
+                "industry",
+                "location"
+              ]
             }
           }
         ],
@@ -715,131 +400,44 @@
             "schema": {
               "type": "object",
               "properties": {
-                "type": {
+                "name": {
                   "type": "string",
-                  "example": "object"
+                  "example": "Tech Solutions Inc."
                 },
-                "required": {
-                  "type": "array",
-                  "example": [
-                    "name",
-                    "industry",
-                    "location"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
+                "industry": {
+                  "type": "string",
+                  "example": "Software Development"
                 },
-                "properties": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Tech Solutions Inc."
-                        }
-                      }
-                    },
-                    "industry": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Software Development"
-                        }
-                      }
-                    },
-                    "location": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Orlando, FL"
-                        }
-                      }
-                    },
-                    "website": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "https://www.techsolutions.com"
-                        }
-                      }
-                    },
-                    "contactName": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Jane Smith"
-                        }
-                      }
-                    },
-                    "contactEmail": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "jane.smith@techsolutions.com"
-                        }
-                      }
-                    },
-                    "contactPhone": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "407-555-5678"
-                        }
-                      }
-                    },
-                    "notes": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Follow up regarding future job openings."
-                        }
-                      }
-                    }
-                  }
+                "location": {
+                  "type": "string",
+                  "example": "Orlando, FL"
+                },
+                "website": {
+                  "type": "string",
+                  "example": "https://www.techsolutions.com"
+                },
+                "contactName": {
+                  "type": "string",
+                  "example": "Jane Smith"
+                },
+                "contactEmail": {
+                  "type": "string",
+                  "example": "jane.smith@techsolutions.com"
+                },
+                "contactPhone": {
+                  "type": "string",
+                  "example": "407-555-5678"
+                },
+                "notes": {
+                  "type": "string",
+                  "example": "Follow up regarding future job openings."
                 }
-              }
+              },
+              "required": [
+                "name",
+                "industry",
+                "location"
+              ]
             }
           }
         ],

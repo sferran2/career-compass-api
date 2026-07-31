@@ -81,46 +81,14 @@ router.post(
       description: 'Company information',
       required: true,
       schema: {
-        type: 'object',
-        required: [
-          'name',
-          'industry',
-          'location'
-        ],
-        properties: {
-          name: {
-            type: 'string',
-            example: 'Tech Solutions Inc.'
-          },
-          industry: {
-            type: 'string',
-            example: 'Software Development'
-          },
-          location: {
-            type: 'string',
-            example: 'Orlando, FL'
-          },
-          website: {
-            type: 'string',
-            example: 'https://www.techsolutions.com'
-          },
-          contactName: {
-            type: 'string',
-            example: 'John Smith'
-          },
-          contactEmail: {
-            type: 'string',
-            example: 'john.smith@techsolutions.com'
-          },
-          contactPhone: {
-            type: 'string',
-            example: '407-555-1234'
-          },
-          notes: {
-            type: 'string',
-            example: 'The company offers remote work opportunities.'
-          }
-        }
+        $name: 'Tech Solutions Inc.',
+        $industry: 'Software Development',
+        $location: 'Orlando, FL',
+        website: 'https://www.techsolutions.com',
+        contactName: 'John Smith',
+        contactEmail: 'john.smith@techsolutions.com',
+        contactPhone: '407-555-1234',
+        notes: 'The company offers remote work opportunities.'
       }
     }
 
@@ -163,46 +131,14 @@ router.put(
       description: 'Updated company information',
       required: true,
       schema: {
-        type: 'object',
-        required: [
-          'name',
-          'industry',
-          'location'
-        ],
-        properties: {
-          name: {
-            type: 'string',
-            example: 'Tech Solutions Inc.'
-          },
-          industry: {
-            type: 'string',
-            example: 'Software Development'
-          },
-          location: {
-            type: 'string',
-            example: 'Orlando, FL'
-          },
-          website: {
-            type: 'string',
-            example: 'https://www.techsolutions.com'
-          },
-          contactName: {
-            type: 'string',
-            example: 'Jane Smith'
-          },
-          contactEmail: {
-            type: 'string',
-            example: 'jane.smith@techsolutions.com'
-          },
-          contactPhone: {
-            type: 'string',
-            example: '407-555-5678'
-          },
-          notes: {
-            type: 'string',
-            example: 'Follow up regarding future job openings.'
-          }
-        }
+        $name: 'Tech Solutions Inc.',
+        $industry: 'Software Development',
+        $location: 'Orlando, FL',
+        website: 'https://www.techsolutions.com',
+        contactName: 'Jane Smith',
+        contactEmail: 'jane.smith@techsolutions.com',
+        contactPhone: '407-555-5678',
+        notes: 'Follow up regarding future job openings.'
       }
     }
 

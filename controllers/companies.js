@@ -51,7 +51,9 @@ const createCompany = async (req, res) => {
       industry: req.body.industry,
       website: req.body.website || "",
       location: req.body.location,
+      contactName: req.body.contactName || "",
       contactEmail: req.body.contactEmail || "",
+      contactPhone: req.body.contactPhone || "",
       notes: req.body.notes || ""
     };
 
@@ -80,7 +82,9 @@ const updateCompany = async (req, res) => {
       industry: req.body.industry,
       website: req.body.website || "",
       location: req.body.location,
+      contactName: req.body.contactName || "",
       contactEmail: req.body.contactEmail || "",
+      contactPhone: req.body.contactPhone || "",
       notes: req.body.notes || ""
     };
 

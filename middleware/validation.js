@@ -105,7 +105,9 @@ const validateCompany = (req, res, next) => {
     industry,
     website,
     location,
+    contactName,
     contactEmail,
+    contactPhone,
     notes
   } = req.body;
 
@@ -135,11 +137,23 @@ const validateCompany = (req, res, next) => {
     }
   }
 
+  if (contactName !== undefined && typeof contactName !== "string") {
+    errors.push("contactName must be text.");
+  }
+
   if (contactEmail !== undefined && contactEmail !== "") {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailPattern.test(contactEmail)) {
       errors.push("contactEmail must be a valid email address.");
+    }
+  }
+
+  if (contactPhone !== undefined && contactPhone !== "") {
+    const phonePattern = /^[\d\s()+.-]{7,20}$/;
+
+    if (!phonePattern.test(contactPhone)) {
+      errors.push("contactPhone must be a valid phone number.");
     }
   }
 
