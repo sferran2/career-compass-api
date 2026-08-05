@@ -1,8 +1,3 @@
-// DNS override only in development
-if (process.env.NODE_ENV !== 'production') {
-  const dns = require('node:dns/promises');
-  dns.setServers(['1.1.1.1', '8.8.8.8']);
-}
 
 require("dotenv").config();
 
@@ -15,6 +10,8 @@ const database = require("./db/connect");
 
 const applicationsRoutes = require("./routes/applications");
 const companiesRoutes = require("./routes/companies");
+const interviewsRoutes = require("./routes/interviews");
+const contactsRoutes = require("./routes/contacts");
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -45,6 +42,8 @@ app.get(
 
 app.use("/applications", applicationsRoutes);
 app.use("/companies", companiesRoutes);
+app.use("/interviews", interviewsRoutes);
+app.use("/contacts", contactsRoutes);
 
 // Handles routes that do not exist
 app.use((req, res) => {
