@@ -89,7 +89,7 @@ app.use((error, req, res, next) => {
     });
   }
 
-  console.error("Unhandled server error:", error);
+  console.error("Unhandled server error:", JSON.stringify(error, Object.getOwnPropertyNames(error)));
 
   res.status(500).json({
     error: "An unexpected server error occurred."
