@@ -25,6 +25,72 @@
         }
       }
     },
+    "/auth/github": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Log in with GitHub",
+        "description": "Redirects the user to GitHub to authorize this application.",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/github/callback": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/failure": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login failure",
+        "description": "Shown when GitHub login fails or is denied.",
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Log out",
+        "description": "Ends the current authenticated session.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/status": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Check login status",
+        "description": "Returns whether the current session is authenticated.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/applications/": {
       "get": {
         "tags": [
@@ -283,7 +349,7 @@
           "Companies"
         ],
         "summary": "Create a new company",
-        "description": "Creates a new company in the database.",
+        "description": "Creates a new company in the database. Requires authentication.",
         "parameters": [
           {
             "name": "body",
@@ -341,6 +407,9 @@
           "400": {
             "description": "Company validation failed."
           },
+          "401": {
+            "description": "You must be logged in to perform this action."
+          },
           "500": {
             "description": "An unexpected server error occurred."
           }
@@ -383,7 +452,7 @@
           "Companies"
         ],
         "summary": "Update a company",
-        "description": "Updates an existing company by its MongoDB ID.",
+        "description": "Updates an existing company by its MongoDB ID. Requires authentication.",
         "parameters": [
           {
             "name": "id",
@@ -447,6 +516,9 @@
           },
           "400": {
             "description": "Company validation failed or invalid MongoDB ID."
+          },
+          "401": {
+            "description": "You must be logged in to perform this action."
           },
           "404": {
             "description": "Company not found."
@@ -518,151 +590,43 @@
             "schema": {
               "type": "object",
               "properties": {
-                "type": {
+                "applicationId": {
                   "type": "string",
-                  "example": "object"
+                  "example": "6a735c759eaa44e729a4b083"
                 },
-                "required": {
-                  "type": "array",
-                  "example": [
-                    "applicationId",
-                    "interviewType",
-                    "interviewDate",
-                    "interviewerName",
-                    "location",
-                    "status"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
+                "interviewType": {
+                  "type": "string",
+                  "example": "Technical"
                 },
-                "properties": {
-                  "type": "object",
-                  "properties": {
-                    "applicationId": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "6a735c759eaa44e729a4b083"
-                        }
-                      }
-                    },
-                    "interviewType": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "enum": {
-                          "type": "array",
-                          "example": [
-                            "Phone",
-                            "Video",
-                            "In Person",
-                            "Technical",
-                            "Panel",
-                            "Final"
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Technical"
-                        }
-                      }
-                    },
-                    "interviewDate": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "format": {
-                          "type": "string",
-                          "example": "date"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "2026-08-10"
-                        }
-                      }
-                    },
-                    "interviewerName": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Sarah Johnson"
-                        }
-                      }
-                    },
-                    "location": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Zoom"
-                        }
-                      }
-                    },
-                    "status": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "enum": {
-                          "type": "array",
-                          "example": [
-                            "Scheduled",
-                            "Completed",
-                            "Cancelled",
-                            "Rescheduled"
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Scheduled"
-                        }
-                      }
-                    },
-                    "notes": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Technical interview with the engineering team."
-                        }
-                      }
-                    }
-                  }
+                "interviewDate": {
+                  "type": "string",
+                  "example": "2026-08-10"
+                },
+                "interviewerName": {
+                  "type": "string",
+                  "example": "Sarah Johnson"
+                },
+                "location": {
+                  "type": "string",
+                  "example": "Zoom"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "Scheduled"
+                },
+                "notes": {
+                  "type": "string",
+                  "example": "Technical interview with the engineering team."
                 }
-              }
+              },
+              "required": [
+                "applicationId",
+                "interviewType",
+                "interviewDate",
+                "interviewerName",
+                "location",
+                "status"
+              ]
             }
           }
         ],
@@ -732,151 +696,43 @@
             "schema": {
               "type": "object",
               "properties": {
-                "type": {
+                "applicationId": {
                   "type": "string",
-                  "example": "object"
+                  "example": "6a735c759eaa44e729a4b083"
                 },
-                "required": {
-                  "type": "array",
-                  "example": [
-                    "applicationId",
-                    "interviewType",
-                    "interviewDate",
-                    "interviewerName",
-                    "location",
-                    "status"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
+                "interviewType": {
+                  "type": "string",
+                  "example": "Final"
                 },
-                "properties": {
-                  "type": "object",
-                  "properties": {
-                    "applicationId": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "6a735c759eaa44e729a4b083"
-                        }
-                      }
-                    },
-                    "interviewType": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "enum": {
-                          "type": "array",
-                          "example": [
-                            "Phone",
-                            "Video",
-                            "In Person",
-                            "Technical",
-                            "Panel",
-                            "Final"
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Final"
-                        }
-                      }
-                    },
-                    "interviewDate": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "format": {
-                          "type": "string",
-                          "example": "date"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "2026-08-12"
-                        }
-                      }
-                    },
-                    "interviewerName": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Sarah Johnson"
-                        }
-                      }
-                    },
-                    "location": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Google Meet"
-                        }
-                      }
-                    },
-                    "status": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "enum": {
-                          "type": "array",
-                          "example": [
-                            "Scheduled",
-                            "Completed",
-                            "Cancelled",
-                            "Rescheduled"
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Rescheduled"
-                        }
-                      }
-                    },
-                    "notes": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Interview rescheduled due to a conflict."
-                        }
-                      }
-                    }
-                  }
+                "interviewDate": {
+                  "type": "string",
+                  "example": "2026-08-12"
+                },
+                "interviewerName": {
+                  "type": "string",
+                  "example": "Sarah Johnson"
+                },
+                "location": {
+                  "type": "string",
+                  "example": "Google Meet"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "Rescheduled"
+                },
+                "notes": {
+                  "type": "string",
+                  "example": "Interview rescheduled due to a conflict."
                 }
-              }
+              },
+              "required": [
+                "applicationId",
+                "interviewType",
+                "interviewDate",
+                "interviewerName",
+                "location",
+                "status"
+              ]
             }
           }
         ],
@@ -947,7 +803,7 @@
           "Contacts"
         ],
         "summary": "Create a new contact",
-        "description": "Creates a new professional contact in the database.",
+        "description": "Creates a new professional contact in the database. Requires authentication.",
         "parameters": [
           {
             "name": "body",
@@ -957,146 +813,45 @@
             "schema": {
               "type": "object",
               "properties": {
-                "type": {
+                "firstName": {
                   "type": "string",
-                  "example": "object"
+                  "example": "Laura"
                 },
-                "required": {
-                  "type": "array",
-                  "example": [
-                    "firstName",
-                    "lastName",
-                    "email",
-                    "contactType"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
+                "lastName": {
+                  "type": "string",
+                  "example": "Martinez"
                 },
-                "properties": {
-                  "type": "object",
-                  "properties": {
-                    "firstName": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Laura"
-                        }
-                      }
-                    },
-                    "lastName": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Martinez"
-                        }
-                      }
-                    },
-                    "email": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "laura.martinez@example.com"
-                        }
-                      }
-                    },
-                    "phone": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "407-555-1234"
-                        }
-                      }
-                    },
-                    "companyId": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "6a6abbbdc4a66a122543b9ed"
-                        }
-                      }
-                    },
-                    "contactType": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "enum": {
-                          "type": "array",
-                          "example": [
-                            "Recruiter",
-                            "Hiring Manager",
-                            "Interviewer",
-                            "Employee",
-                            "Networking Contact",
-                            "Other"
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Recruiter"
-                        }
-                      }
-                    },
-                    "linkedInUrl": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "https://www.linkedin.com/in/laura-martinez"
-                        }
-                      }
-                    },
-                    "notes": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Recruiter contact for future opportunities."
-                        }
-                      }
-                    }
-                  }
+                "email": {
+                  "type": "string",
+                  "example": "laura.martinez@example.com"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "407-555-1234"
+                },
+                "companyId": {
+                  "type": "string",
+                  "example": "6a6abbbdc4a66a122543b9ed"
+                },
+                "contactType": {
+                  "type": "string",
+                  "example": "Recruiter"
+                },
+                "linkedInUrl": {
+                  "type": "string",
+                  "example": "https://www.linkedin.com/in/laura-martinez"
+                },
+                "notes": {
+                  "type": "string",
+                  "example": "Recruiter contact for future opportunities."
                 }
-              }
+              },
+              "required": [
+                "firstName",
+                "lastName",
+                "email",
+                "contactType"
+              ]
             }
           }
         ],
@@ -1106,6 +861,9 @@
           },
           "400": {
             "description": "Contact validation failed or company does not exist."
+          },
+          "401": {
+            "description": "You must be logged in to perform this action."
           },
           "409": {
             "description": "A contact with that email already exists."
@@ -1152,7 +910,7 @@
           "Contacts"
         ],
         "summary": "Update a contact",
-        "description": "Updates an existing contact by its MongoDB ID.",
+        "description": "Updates an existing contact by its MongoDB ID. Requires authentication.",
         "parameters": [
           {
             "name": "id",
@@ -1169,146 +927,45 @@
             "schema": {
               "type": "object",
               "properties": {
-                "type": {
+                "firstName": {
                   "type": "string",
-                  "example": "object"
+                  "example": "Laura"
                 },
-                "required": {
-                  "type": "array",
-                  "example": [
-                    "firstName",
-                    "lastName",
-                    "email",
-                    "contactType"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
+                "lastName": {
+                  "type": "string",
+                  "example": "Martinez"
                 },
-                "properties": {
-                  "type": "object",
-                  "properties": {
-                    "firstName": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Laura"
-                        }
-                      }
-                    },
-                    "lastName": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Martinez"
-                        }
-                      }
-                    },
-                    "email": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "laura.martinez@example.com"
-                        }
-                      }
-                    },
-                    "phone": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "407-555-9999"
-                        }
-                      }
-                    },
-                    "companyId": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "6a6abbbdc4a66a122543b9ed"
-                        }
-                      }
-                    },
-                    "contactType": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "enum": {
-                          "type": "array",
-                          "example": [
-                            "Recruiter",
-                            "Hiring Manager",
-                            "Interviewer",
-                            "Employee",
-                            "Networking Contact",
-                            "Other"
-                          ],
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Hiring Manager"
-                        }
-                      }
-                    },
-                    "linkedInUrl": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "https://www.linkedin.com/in/laura-martinez"
-                        }
-                      }
-                    },
-                    "notes": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "example": "string"
-                        },
-                        "example": {
-                          "type": "string",
-                          "example": "Updated contact information."
-                        }
-                      }
-                    }
-                  }
+                "email": {
+                  "type": "string",
+                  "example": "laura.martinez@example.com"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "407-555-9999"
+                },
+                "companyId": {
+                  "type": "string",
+                  "example": "6a6abbbdc4a66a122543b9ed"
+                },
+                "contactType": {
+                  "type": "string",
+                  "example": "Hiring Manager"
+                },
+                "linkedInUrl": {
+                  "type": "string",
+                  "example": "https://www.linkedin.com/in/laura-martinez"
+                },
+                "notes": {
+                  "type": "string",
+                  "example": "Updated contact information."
                 }
-              }
+              },
+              "required": [
+                "firstName",
+                "lastName",
+                "email",
+                "contactType"
+              ]
             }
           }
         ],
@@ -1318,6 +975,9 @@
           },
           "400": {
             "description": "Contact validation failed, invalid MongoDB ID, or company does not exist."
+          },
+          "401": {
+            "description": "You must be logged in to perform this action."
           },
           "404": {
             "description": "Contact not found."
