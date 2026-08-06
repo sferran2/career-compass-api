@@ -46,6 +46,18 @@ const getSingle = async (req, res) => {
 
 const createApplication = async (req, res) => {
   try {
+    const db = database.getDatabase();
+
+    const company = await db.collection("companies").findOne({
+      _id: new ObjectId(req.body.companyId)
+    });
+
+    if (!company) {
+      return res.status(400).json({
+        error: "The selected company does not exist."
+      });
+    }
+
     const newApplication = {
       jobTitle: req.body.jobTitle,
       companyId: new ObjectId(req.body.companyId),
@@ -58,8 +70,7 @@ const createApplication = async (req, res) => {
       notes: req.body.notes || ""
     };
 
-    const result = await database
-      .getDatabase()
+    const result = await db
       .collection("applications")
       .insertOne(newApplication);
 
@@ -78,6 +89,18 @@ const createApplication = async (req, res) => {
 
 const updateApplication = async (req, res) => {
   try {
+    const db = database.getDatabase();
+
+    const company = await db.collection("companies").findOne({
+      _id: new ObjectId(req.body.companyId)
+    });
+
+    if (!company) {
+      return res.status(400).json({
+        error: "The selected company does not exist."
+      });
+    }
+
     const updatedApplication = {
       jobTitle: req.body.jobTitle,
       companyId: new ObjectId(req.body.companyId),
@@ -90,8 +113,7 @@ const updateApplication = async (req, res) => {
       notes: req.body.notes || ""
     };
 
-    const result = await database
-      .getDatabase()
+    const result = await db
       .collection("applications")
       .updateOne(
         { _id: new ObjectId(req.params.id) },

@@ -78,60 +78,13 @@ router.post(
       description: 'Interview information',
       required: true,
       schema: {
-        type: 'object',
-        required: [
-          'applicationId',
-          'interviewType',
-          'interviewDate',
-          'interviewerName',
-          'location',
-          'status'
-        ],
-        properties: {
-          applicationId: {
-            type: 'string',
-            example: '6a735c759eaa44e729a4b083'
-          },
-          interviewType: {
-            type: 'string',
-            enum: [
-              'Phone',
-              'Video',
-              'In Person',
-              'Technical',
-              'Panel',
-              'Final'
-            ],
-            example: 'Technical'
-          },
-          interviewDate: {
-            type: 'string',
-            format: 'date',
-            example: '2026-08-10'
-          },
-          interviewerName: {
-            type: 'string',
-            example: 'Sarah Johnson'
-          },
-          location: {
-            type: 'string',
-            example: 'Zoom'
-          },
-          status: {
-            type: 'string',
-            enum: [
-              'Scheduled',
-              'Completed',
-              'Cancelled',
-              'Rescheduled'
-            ],
-            example: 'Scheduled'
-          },
-          notes: {
-            type: 'string',
-            example: 'Technical interview with the engineering team.'
-          }
-        }
+        $applicationId: '6a735c759eaa44e729a4b083',
+        $interviewType: 'Technical',
+        $interviewDate: '2026-08-10',
+        $interviewerName: 'Sarah Johnson',
+        $location: 'Zoom',
+        $status: 'Scheduled',
+        notes: 'Technical interview with the engineering team.'
       }
     }
 
@@ -173,60 +126,13 @@ router.put(
       description: 'Updated interview information',
       required: true,
       schema: {
-        type: 'object',
-        required: [
-          'applicationId',
-          'interviewType',
-          'interviewDate',
-          'interviewerName',
-          'location',
-          'status'
-        ],
-        properties: {
-          applicationId: {
-            type: 'string',
-            example: '6a735c759eaa44e729a4b083'
-          },
-          interviewType: {
-            type: 'string',
-            enum: [
-              'Phone',
-              'Video',
-              'In Person',
-              'Technical',
-              'Panel',
-              'Final'
-            ],
-            example: 'Final'
-          },
-          interviewDate: {
-            type: 'string',
-            format: 'date',
-            example: '2026-08-12'
-          },
-          interviewerName: {
-            type: 'string',
-            example: 'Sarah Johnson'
-          },
-          location: {
-            type: 'string',
-            example: 'Google Meet'
-          },
-          status: {
-            type: 'string',
-            enum: [
-              'Scheduled',
-              'Completed',
-              'Cancelled',
-              'Rescheduled'
-            ],
-            example: 'Rescheduled'
-          },
-          notes: {
-            type: 'string',
-            example: 'Interview rescheduled due to a conflict.'
-          }
-        }
+        $applicationId: '6a735c759eaa44e729a4b083',
+        $interviewType: 'Final',
+        $interviewDate: '2026-08-12',
+        $interviewerName: 'Sarah Johnson',
+        $location: 'Google Meet',
+        $status: 'Rescheduled',
+        notes: 'Interview rescheduled due to a conflict.'
       }
     }
 

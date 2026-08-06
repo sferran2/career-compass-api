@@ -8,6 +8,8 @@ const {
   validateCompany
 } = require("../middleware/validation");
 
+const { ensureAuthenticated } = require("../middleware/auth");
+
 // GET all companies
 router.get(
   "/",
@@ -69,12 +71,13 @@ router.get(
 // CREATE a company
 router.post(
   "/",
+  ensureAuthenticated,
   validateCompany,
   /*
     #swagger.start
     #swagger.tags = ['Companies']
     #swagger.summary = 'Create a new company'
-    #swagger.description = 'Creates a new company in the database.'
+    #swagger.description = 'Creates a new company in the database. Requires authentication.'
 
     #swagger.parameters['body'] = {
       in: 'body',
@@ -100,6 +103,10 @@ router.post(
       description: 'Company validation failed.'
     }
 
+    #swagger.responses[401] = {
+      description: 'You must be logged in to perform this action.'
+    }
+
     #swagger.responses[500] = {
       description: 'An unexpected server error occurred.'
     }
@@ -111,13 +118,14 @@ router.post(
 // UPDATE a company
 router.put(
   "/:id",
+  ensureAuthenticated,
   validateObjectId,
   validateCompany,
   /*
     #swagger.start
     #swagger.tags = ['Companies']
     #swagger.summary = 'Update a company'
-    #swagger.description = 'Updates an existing company by its MongoDB ID.'
+    #swagger.description = 'Updates an existing company by its MongoDB ID. Requires authentication.'
 
     #swagger.parameters['id'] = {
       in: 'path',
@@ -148,6 +156,10 @@ router.put(
 
     #swagger.responses[400] = {
       description: 'Company validation failed or invalid MongoDB ID.'
+    }
+
+    #swagger.responses[401] = {
+      description: 'You must be logged in to perform this action.'
     }
 
     #swagger.responses[404] = {

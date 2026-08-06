@@ -8,6 +8,8 @@ const {
   validateContact
 } = require("../middleware/validation");
 
+const { ensureAuthenticated } = require("../middleware/auth");
+
 router.get(
   "/",
   /*
@@ -66,67 +68,27 @@ router.get(
 
 router.post(
   "/",
+  ensureAuthenticated,
   validateContact,
   /*
     #swagger.start
     #swagger.tags = ['Contacts']
     #swagger.summary = 'Create a new contact'
-    #swagger.description = 'Creates a new professional contact in the database.'
+    #swagger.description = 'Creates a new professional contact in the database. Requires authentication.'
 
     #swagger.parameters['body'] = {
       in: 'body',
       description: 'Contact information',
       required: true,
       schema: {
-        type: 'object',
-        required: [
-          'firstName',
-          'lastName',
-          'email',
-          'contactType'
-        ],
-        properties: {
-          firstName: {
-            type: 'string',
-            example: 'Laura'
-          },
-          lastName: {
-            type: 'string',
-            example: 'Martinez'
-          },
-          email: {
-            type: 'string',
-            example: 'laura.martinez@example.com'
-          },
-          phone: {
-            type: 'string',
-            example: '407-555-1234'
-          },
-          companyId: {
-            type: 'string',
-            example: '6a6abbbdc4a66a122543b9ed'
-          },
-          contactType: {
-            type: 'string',
-            enum: [
-              'Recruiter',
-              'Hiring Manager',
-              'Interviewer',
-              'Employee',
-              'Networking Contact',
-              'Other'
-            ],
-            example: 'Recruiter'
-          },
-          linkedInUrl: {
-            type: 'string',
-            example: 'https://www.linkedin.com/in/laura-martinez'
-          },
-          notes: {
-            type: 'string',
-            example: 'Recruiter contact for future opportunities.'
-          }
-        }
+        $firstName: 'Laura',
+        $lastName: 'Martinez',
+        $email: 'laura.martinez@example.com',
+        phone: '407-555-1234',
+        companyId: '6a6abbbdc4a66a122543b9ed',
+        $contactType: 'Recruiter',
+        linkedInUrl: 'https://www.linkedin.com/in/laura-martinez',
+        notes: 'Recruiter contact for future opportunities.'
       }
     }
 
@@ -136,6 +98,10 @@ router.post(
 
     #swagger.responses[400] = {
       description: 'Contact validation failed or company does not exist.'
+    }
+
+    #swagger.responses[401] = {
+      description: 'You must be logged in to perform this action.'
     }
 
     #swagger.responses[409] = {
@@ -152,13 +118,14 @@ router.post(
 
 router.put(
   "/:id",
+  ensureAuthenticated,
   validateObjectId,
   validateContact,
   /*
     #swagger.start
     #swagger.tags = ['Contacts']
     #swagger.summary = 'Update a contact'
-    #swagger.description = 'Updates an existing contact by its MongoDB ID.'
+    #swagger.description = 'Updates an existing contact by its MongoDB ID. Requires authentication.'
 
     #swagger.parameters['id'] = {
       in: 'path',
@@ -172,55 +139,14 @@ router.put(
       description: 'Updated contact information',
       required: true,
       schema: {
-        type: 'object',
-        required: [
-          'firstName',
-          'lastName',
-          'email',
-          'contactType'
-        ],
-        properties: {
-          firstName: {
-            type: 'string',
-            example: 'Laura'
-          },
-          lastName: {
-            type: 'string',
-            example: 'Martinez'
-          },
-          email: {
-            type: 'string',
-            example: 'laura.martinez@example.com'
-          },
-          phone: {
-            type: 'string',
-            example: '407-555-9999'
-          },
-          companyId: {
-            type: 'string',
-            example: '6a6abbbdc4a66a122543b9ed'
-          },
-          contactType: {
-            type: 'string',
-            enum: [
-              'Recruiter',
-              'Hiring Manager',
-              'Interviewer',
-              'Employee',
-              'Networking Contact',
-              'Other'
-            ],
-            example: 'Hiring Manager'
-          },
-          linkedInUrl: {
-            type: 'string',
-            example: 'https://www.linkedin.com/in/laura-martinez'
-          },
-          notes: {
-            type: 'string',
-            example: 'Updated contact information.'
-          }
-        }
+        $firstName: 'Laura',
+        $lastName: 'Martinez',
+        $email: 'laura.martinez@example.com',
+        phone: '407-555-9999',
+        companyId: '6a6abbbdc4a66a122543b9ed',
+        $contactType: 'Hiring Manager',
+        linkedInUrl: 'https://www.linkedin.com/in/laura-martinez',
+        notes: 'Updated contact information.'
       }
     }
 
@@ -230,6 +156,10 @@ router.put(
 
     #swagger.responses[400] = {
       description: 'Contact validation failed, invalid MongoDB ID, or company does not exist.'
+    }
+
+    #swagger.responses[401] = {
+      description: 'You must be logged in to perform this action.'
     }
 
     #swagger.responses[404] = {
