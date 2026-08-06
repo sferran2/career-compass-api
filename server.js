@@ -61,14 +61,18 @@ app.use((error, req, res, next) => {
   });
 });
 
-database
-  .initializeDatabase()
-  .then(() => {
-    app.listen(port, () => {
-      console.log(`Server is running on port ${port}`);
+if (require.main === module) {
+  database
+    .initializeDatabase()
+    .then(() => {
+      app.listen(port, () => {
+        console.log(`Server is running on port ${port}`);
+      });
+    })
+    .catch((error) => {
+      console.error("Server did not start:", error);
+      process.exit(1);
     });
-  })
-  .catch((error) => {
-    console.error("Server did not start:", error);
-    process.exit(1);
-  });
+}
+
+module.exports = app;
